@@ -16,14 +16,20 @@ fn main() {
 
     fs::create_dir_all(&output_path).unwrap();
 
+    let mut full = String::new();
+
     for (index, arg) in args().enumerate() {
         fs::write(
             append_to_path(
                 output_path.clone(),
                 &("/".to_string() + &index.to_string() + ".txt"),
             ),
-            arg,
+            &arg,
         )
         .expect("Unable to write file");
+        full += &arg;
+        full += " ";
     }
+    fs::write(append_to_path(output_path.clone(), "/.full.txt"), &full)
+        .expect("Unable to write file");
 }
