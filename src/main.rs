@@ -9,6 +9,7 @@ fn append_to_path(p: PathBuf, s: &str) -> PathBuf {
 fn main() {
     let mut output_path = home::home_dir().unwrap();
     output_path.push("argsbounce");
+    fs::create_dir_all(&output_path).unwrap();
     let previous_runs = fs::read_dir(&output_path).unwrap();
     let new_run_id = previous_runs.count().to_string();
     output_path.push(new_run_id);
